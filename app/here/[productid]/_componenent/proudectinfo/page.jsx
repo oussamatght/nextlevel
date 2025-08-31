@@ -28,12 +28,11 @@ export default function ProductInfo({ pro }) {
     };
 
     try {
-      const response = await CartAPI.addToCart(data);
-      alert("Product added to cart please refresh the page and see the updated cart");
-      
+      await CartAPI.addToCart(data);
+      alert("Product added to cart. Refresh the page to see updates.");
+
       setCart((prevCart) => {
-        const newCart = prevCart ? [...prevCart, pro] : [pro];
-        return newCart;
+        return prevCart ? [...prevCart, pro] : [pro];
       });
     } catch (error) {
       console.error("Error adding product to cart:", error.response?.data || error.message);
@@ -41,30 +40,31 @@ export default function ProductInfo({ pro }) {
   };
 
   return (
-    <div>
-      <h2 className="text-[25px]">{pro.title}</h2>
-      <p className="text-[16px] text-gray-400">{pro.category}</p>
-      <p className="text-[20px]">{desc}</p>
-      <h2 className="text-[32px] text-green-500 mt-3">${pro.price}</h2>
-      <h2 className="text-[16px] text-gray-400">
-        {pro?.delivery ? (
-          <>
-            <BadgeCheck className="w-5 h-7 inline-block mr-1 text-green-500" />
-            Eligible for FREE instant delivery
-          </>
-        ) : (
-          <>
-            <BadgeCheck className="w-5 h-7 inline-block mr-1 text-red-500" />
-            Not eligible for delivery
-          </>
-        )}
-      </h2>
-      <button
-        className="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition flex items-center"
-        onClick={handleAddToCart}
-      >
-        <ShoppingCartIcon className="w-5 h-7 mr-1" /> Add to Cart
-      </button>
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-xl space-y-4 sm:p-8 md:flex md:space-x-6 md:space-y-0">
+      <div className="flex-1">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{pro.title}</h2>
+        <p className="text-sm sm:text-base text-gray-500 mt-1">{pro.category}</p>
+        <p className="text-base sm:text-lg text-gray-700 mt-2">{desc}</p>
+        <h2 className="text-2xl sm:text-3xl text-green-500 mt-3 font-semibold">${pro.price}</h2>
+
+        <div className="flex items-center mt-2 text-sm sm:text-base">
+          {pro?.delivery ? (
+            <BadgeCheck className="w-5 h-5 text-green-500 mr-2" />
+          ) : (
+            <BadgeCheck className="w-5 h-5 text-red-500 mr-2" />
+          )}
+          <span className={`text-gray-500 ${pro?.delivery ? "text-green-600" : "text-red-500"}`}>
+            {pro?.delivery ? "Eligible for FREE instant delivery" : "Not eligible for delivery"}
+          </span>
+        </div>
+
+        <button
+          className="mt-4 w-full md:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition font-medium"
+          onClick={handleAddToCart}
+        >
+          <ShoppingCartIcon className="w-5 h-5 mr-2" /> Add to Cart
+        </button>
+      </div>
     </div>
   );
 }
