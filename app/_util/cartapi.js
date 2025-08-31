@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/carts`;
+const API_URL = `https://strip-dn1h.onrender.com//api/carts`;
 
 
 const CartAPI = {
