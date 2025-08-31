@@ -1,67 +1,76 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>🌟 E-Commerce Project</h1>
 
-## Getting Started
+<p>This project is a modern e-commerce platform built with <strong>Strapi</strong> as a headless CMS, <strong>Next.js</strong> for the frontend, <strong>Stripe</strong> for payments, and <strong>Cloudinary</strong> for media hosting.</p>
 
-First, run the development server:
+<hr>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<h2>🛠️ Technologies Used</h2>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h3>📝 Strapi (Headless CMS)</h3>
+<ul>
+  <li>📁 <strong>Media Library</strong> – stores all product images in <code>public/uploads</code> or Cloudinary.</li>
+  <li>🔑 <strong>Role-based Access Control</strong> – secure admin and user permissions.</li>
+  <li>🔗 <strong>REST & GraphQL APIs</strong> – frontend fetches data easily.</li>
+  <li>⚡ <strong>Flexible & Extensible</strong> – add new fields and content types without backend code changes.</li>
+  <li>💾 <strong>Database:</strong> Strapi uses <strong>SQLite</strong> by default for local data storage.</li>
+  <li>⚠️ <strong>Problem Handling:</strong> Strapi logs errors in <code>.tmp</code> and prevents invalid data from breaking the app.</li>
+</ul>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+<h3>💾 SQLite</h3>
+<ul>
+  <li>Lightweight <strong>database</strong> used by Strapi for storing project data.</li>
+  <li>Data is stored locally in <code>.tmp/data/data.db</code>.</li>
+  <li>Stores products, users, and other dynamic content.</li>
+  <li>⚠️ Always backup the <code>.tmp</code> folder to retain old data.</li>
+</ul>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<h3>⚛️ Next.js</h3>
+<ul>
+  <li>React framework for the <strong>frontend</strong>.</li>
+  <li>Supports 🖥️ server-side rendering (SSR) and static site generation (SSG).</li>
+  <li>Fetches dynamic data from Strapi APIs.</li>
+  <li>🚀 Fast performance and SEO-friendly pages.</li>
+</ul>
 
-## Learn More
+<h3>💳 Stripe</h3>
+<ul>
+  <li>Secure payment processing for products and orders.</li>
+  <li>Supports credit cards, Apple Pay, Google Pay, and other payment methods.</li>
+  <li>Integration with Next.js frontend and Strapi backend.</li>
+  <li>🛡️ Sensitive keys stored in <code>.env</code> to keep your API secure.</li>
+</ul>
 
-To learn more about Next.js, take a look at the following resources:
+<h3>📧 EmailJS</h3>
+<ul>
+  <li>Send emails directly from the frontend without a backend SMTP server.</li>
+  <li>Used for contact forms, order confirmations, and notifications.</li>
+  <li>🔒 Secure API keys stored in environment variables.</li>
+  <li>✅ Easy integration with React forms and Strapi data.</li>
+</ul>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<h3>☁️ Cloudinary</h3>
+<ul>
+  <li>Host product images, videos, and other media in the cloud.</li>
+  <li>Integrates with Strapi for automatic media uploads.</li>
+  <li>Reduces load on your server and speeds up content delivery.</li>
+  <li>Supports image optimization, transformations, and CDN delivery.</li>
+</ul>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<h3>🌐 Additional Tools</h3>
+<ul>
+  <li>Node.js & npm – run backend & frontend.</li>
+  <li>Git & GitHub – version control.</li>
+  <li>Render / Vercel – deployment platform for hosting Strapi and Next.js together.</li>
+</ul>
 
-## Deploy on Vercel
+<hr>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<h2>🚀 Setup Instructions</h2>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# ecommerce
->>>>>>> 6dbee9eb7ed4fcf45f722570700b84f5c7402ab0
-=======
-# -NextLevel-Academy
-NextLevel-Academy is a modern full-stack Next.js app for selling digital products. Features Clerk auth, Strapi backend, Stripe payments, EmailJS contact form, responsive TailwindCSS UI, and Lucide icons for a polished e-commerce experience. 
-# NextLevel-Academy
+  <li>Access your site on <code>https://nextlevel-m5ho.onrender.com/</code>.</li>
+</ol>
 
-NextLevel-Academy is a modern full-stack Next.js application designed to showcase and sell digital products. It integrates authentication, a headless CMS, and payment processing for a complete e-commerce experience.
-
-## Features
-
-- **Authentication**: Secure sign-in and sign-up with [Clerk](https://clerk.com/).  
-- **Backend CMS**: Manage products, categories, and content via [Strapi](https://strapi.io/).  
-- **Payments**: Accept payments using [Stripe](https://stripe.com/).  
-- **Frontend**: Responsive UI built with Next.js, TailwindCSS, and DaisyUI.  
-- **Email Contact Form**: Users can send messages via EmailJS.  
-- **Icons & UI**: Clean visuals using Lucide icons.
-
-## Tech Stack
-
-- **Frontend**: Next.js, React, TailwindCSS, DaisyUI, Lucide  
-- **Backend**: Strapi CMS  
-- **Authentication**: Clerk  
-- **Payments**: Stripe  
-- **Email Service**: EmailJS
+<hr>
 
 
->>>>>>> a1351b3c91625118c99517e374185ae42e9f18a3
+
