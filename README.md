@@ -67,7 +67,7 @@
 
 <h2>🚀 Setup Instructions</h2>
 
-  <li>Access your site on <code>https://nextlevel-m5ho.onrender.com/</code>.</li>
+  <a href="https://nextlevel-m5ho.onrender.com">Access your site on </a>
 </ol>
 
 <hr>
