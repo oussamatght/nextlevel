@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `https://strip-dn1h.onrender.com/api/products`;
+const API_URL = `https://strip-1.onrender.com/api/products`;
 
 export const products = {
     getAll: async() => {
