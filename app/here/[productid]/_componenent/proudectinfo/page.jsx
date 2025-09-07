@@ -6,7 +6,8 @@ import Link from "next/link";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { ShoppingCartIcon, MenuIcon, XIcon } from "lucide-react";
 import { CartContext } from "@/app/cartcontext/cartcontext.jsx";
-import CartAPI from "../_util/cartapi";
+import CartAPI from "@/app/_util/cartapi";
+
 import { useUser } from "@clerk/nextjs";
 import Cart from "@/app/cart/cart.jsx";
 import { motion, AnimatePresence } from "framer-motion";
