@@ -1,114 +1,70 @@
 "use client";
 
-import React, { useState, useContext, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import { ShoppingCartIcon, MenuIcon, XIcon } from "lucide-react";
-import { CartContext } from "@/app/cartcontext/cartcontext.jsx";
-import CartAPI from "@/app/_util/cartapi";
-
 import { useUser } from "@clerk/nextjs";
-import Cart from "@/app/cart/cart.jsx";
-import { motion, AnimatePresence } from "framer-motion";
+import { BadgeCheck, ShoppingCartIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import CartAPI from "@/app/_util/cartapi";
+import { CartContext } from "@/app/cartcontext/cartcontext.jsx";
 
-export default function Header() {
-  const [cartIsOpen, setCartIsOpen] = useState(false);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
+export default function ProductInfo({ pro }) {
+  const desc = pro?.discription?.[0]?.children?.[0]?.text ?? "No description";
+  const { user } = useUser();
+  const router = useRouter();
   const { cart, setCart } = useContext(CartContext);
-  const { user, isSignedIn } = useUser();
 
-  useEffect(() => {
-    if (isSignedIn) fetchCartItems();
-  }, [isSignedIn]);
+  const handleAddToCart = async () => {
+    if (!user) {
+      router.push("/sign-in");
+      return;
+    }
 
-  const fetchCartItems = async () => {
-    if (!user?.primaryEmailAddress?.emailAddress) return;
+    const data = {
+      data: {
+        username: user.fullName,
+        email: user.primaryEmailAddress?.emailAddress,
+        products: [pro?.id],
+      },
+    };
+
     try {
-      const response = await CartAPI.getCartItems(user.primaryEmailAddress.emailAddress);
-      setCart(response.data || []);
+      await CartAPI.addToCart(data);
+      alert("Product added to cart. Refresh the page to see updates.");
+
+      setCart((prevCart) => {
+        return prevCart ? [...prevCart, pro] : [pro];
+      });
     } catch (error) {
-      console.error("Error fetching cart items:", error.response?.data || error.message);
+      console.error("Error adding product to cart:", error.response?.data || error.message);
     }
   };
 
   return (
-    <header className="bg-white dark:bg-indigo-900 shadow-md rounded-b-2xl w-full fixed top-0 z-50">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/logoipsum-386.svg" alt="Logo" width={40} height={40} />
-          <span className="text-2xl font-bold text-indigo-900 dark:text-white">
-            NextLevel Academy
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-xl space-y-4 sm:p-8 md:flex md:space-x-6 md:space-y-0">
+      <div className="flex-1">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{pro.title}</h2>
+        <p className="text-sm sm:text-base text-gray-500 mt-1">{pro.category}</p>
+        <p className="text-base sm:text-lg text-gray-700 mt-2">{desc}</p>
+        <h2 className="text-2xl sm:text-3xl text-green-500 mt-3 font-semibold">${pro.price}</h2>
+
+        <div className="flex items-center mt-2 text-sm sm:text-base">
+          {pro?.delivery ? (
+            <BadgeCheck className="w-5 h-5 text-green-500 mr-2" />
+          ) : (
+            <BadgeCheck className="w-5 h-5 text-red-500 mr-2" />
+          )}
+          <span className={`text-gray-500 ${pro?.delivery ? "text-green-600" : "text-red-500"}`}>
+            {pro?.delivery ? "Eligible for FREE instant delivery" : "Not eligible for delivery"}
           </span>
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 font-semibold text-indigo-900 dark:text-white">
-          <Link href="/" className="hover:text-yellow-400 transition">Home</Link>
-          <a href="#see-all" className="hover:text-yellow-400 transition">Services</a>
-          <Link href="#footer" className="hover:text-yellow-400 transition">About Us</Link>
-        </nav>
-
-        {/* Right Actions */}
-        <div className="flex items-center gap-4 relative">
-          <button
-            onClick={() => setCartIsOpen(!cartIsOpen)}
-            className="relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-          >
-            <ShoppingCartIcon className="w-6 h-6" />
-            {cart?.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {cart.length}
-              </span>
-            )}
-          </button>
-
-          <AnimatePresence>
-            {cartIsOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-                className="absolute right-0 top-12 z-50"
-              >
-                <Cart />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-            onClick={() => setMenuIsOpen(!menuIsOpen)}
-          >
-            {menuIsOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuIsOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden bg-white dark:bg-indigo-900"
-          >
-            <nav className="flex flex-col gap-4 py-4 px-6 text-right text-indigo-900 dark:text-white font-semibold">
-              <Link href="/" className="hover:text-yellow-400 transition">Home</Link>
-              <a href="#see-all" className="hover:text-yellow-400 transition">Services</a>
-              <Link href="#footer" className="hover:text-yellow-400 transition">About Us</Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+        <button
+          className="mt-4 w-full md:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition font-medium"
+          onClick={handleAddToCart}
+        >
+          <ShoppingCartIcon className="w-5 h-5 mr-2" /> Add to Cart
+        </button>
+      </div>
+    </div>
   );
 }
