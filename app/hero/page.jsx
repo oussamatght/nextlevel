@@ -22,7 +22,7 @@ export default function Hero() {
             Get Started
           </a>
           <a
-            href="#learn-more"
+            href="https://github.com/oussamatght/nextlevel/tree/main"
             className="inline-block border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-indigo-900 transition"
           >
             Learn More
@@ -36,3 +36,4 @@ export default function Hero() {
     </section>
   );
 }
+
