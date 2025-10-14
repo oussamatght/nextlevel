@@ -69,7 +69,6 @@ function Cart() {
         )}
       </ul>
 
-      {/* Footer */}
       <div className="px-4 py-3 border-t border-gray-200 flex-shrink-0 space-y-2">
         <div className="flex justify-between text-sm sm:text-base font-semibold text-gray-900">
           <span>Total:</span>
