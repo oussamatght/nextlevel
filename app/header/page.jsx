@@ -33,7 +33,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white dark:bg-indigo-900 shadow-md rounded-2xl w-full">
+    <header className="bg-white dark:bg-indigo-900 shadow-md  w-full">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/logoipsum-386.svg" alt="Logo" width={32} height={32} />
