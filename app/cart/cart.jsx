@@ -8,7 +8,6 @@ function Cart() {
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(true);
 
-  // Calculate total
   const total = cart.reduce((acc, cartItem) => {
     if (!cartItem.products) return acc;
     return (
