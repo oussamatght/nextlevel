@@ -29,7 +29,7 @@ export default function ProductInfo({ pro }) {
 
     try {
       await CartAPI.addToCart(data);
-      alert("Product added to cart. Refresh the page to see updates.");
+window.location.href = "https://nextlevel-m5ho.onrender.com/carts";
 
       setCart((prevCart) => {
         return prevCart ? [...prevCart, pro] : [pro];
