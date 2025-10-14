@@ -24,7 +24,6 @@ function Cart() {
   return (
     <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-4 bg-white border border-gray-200 rounded-xl shadow-lg flex flex-col max-h-[80vh]">
       
-      {/* Cart Header */}
       <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200 flex-shrink-0">
         <h2 className="text-lg font-bold text-gray-900 truncate">Your Cart</h2>
         <button
