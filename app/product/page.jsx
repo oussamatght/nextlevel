@@ -45,7 +45,6 @@ function Product() {
         </a>
       </div>
 
-      {/* Stats banner */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
         <div className="flex flex-col items-center bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
           <GraduationCap className="text-indigo-700 w-8 h-8 mb-2" />
