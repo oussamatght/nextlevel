@@ -102,9 +102,9 @@ export default function Footer() {
               oussamatght6@gmail.com
             </a>
           </p>
-          <p className="mb-3 text-gray-300 text-sm">📞 +213 07991512</p>
+          <p className="mb-3 text-gray-300 text-sm">📞 +213 0799711512</p>
           <p className="mb-3 text-gray-300 text-sm">
-            📍 Algiers, Algeria (Remote)
+             Algiers, Algeria (Remote)
           </p>
 
           <div className="flex items-center gap-4 mt-5">
