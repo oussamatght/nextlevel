@@ -93,7 +93,7 @@ function Cart() {
         </Link>
 
         <Link
-          href="#see-all"
+          href="https://nextlevel-m5ho.onrender.com/#see-all"
           className="block text-center text-indigo-900 text-xs underline underline-offset-4 hover:text-indigo-600"
         >
           Continue Shopping
