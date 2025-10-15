@@ -95,7 +95,7 @@ const router = useRouter();
         </Link>
 
       <button
-  onClick={() => router.push("/see-all")}
+  onClick={() => router.push("/")}
   className="block w-full text-center text-indigo-900 text-xs underline underline-offset-4 hover:text-indigo-600"
 >
   Continue Shopping
