@@ -7,9 +7,6 @@ import {
   BookOpen,
   Laptop,
   Users,
-  Globe,
-  Code2,
-  MonitorSmartphone,
 } from "lucide-react";
 
 export default function Hero() {
@@ -91,17 +88,6 @@ export default function Hero() {
               alt="Cybersecurity concept with lock"
               className="rounded-2xl shadow-lg w-36 sm:w-44 md:w-52 h-36 sm:h-44 md:h-52 object-cover hover:scale-105 transition duration-500 mt-6"
             />
-          </div>
-
-          {/* Floating icons */}
-          <div className="absolute -bottom-6 -left-6 bg-indigo-800/60 backdrop-blur-md border border-indigo-700 rounded-full p-3">
-            <Code2 className="text-yellow-300 w-6 h-6" />
-          </div>
-          <div className="absolute -top-6 -right-6 bg-indigo-800/60 backdrop-blur-md border border-indigo-700 rounded-full p-3">
-            <Globe className="text-yellow-300 w-6 h-6" />
-          </div>
-          <div className="absolute bottom-8 right-10 bg-indigo-800/60 backdrop-blur-md border border-indigo-700 rounded-full p-3">
-            <MonitorSmartphone className="text-yellow-300 w-6 h-6" />
           </div>
         </div>
       </div>
