@@ -1,20 +1,17 @@
+"use client";
 
-
-
-export const metadata = {
-  title: "Home",
-  description: "Welcome page",
-};
-
-import Product from "./product/page";
-import Hero from "./hero/page";
+import Hero from "./hero/page.jsx";
+import Product from "./product/page.jsx";
+import Testimonials from "./components/Testimonials.jsx";
 
 export default function Home() {
   return (
-    <div>
-     <Hero />
-     <Product/>
-      
+    <div className="bg-gray-50">
+      <Hero />
+
+        <Product />
+
+      <Testimonials />
     </div>
   );
 }
