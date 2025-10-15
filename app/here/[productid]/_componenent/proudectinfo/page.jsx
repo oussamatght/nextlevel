@@ -8,7 +8,10 @@ import CartAPI from "@/app/_util/cartapi";
 import { CartContext } from "@/app/cartcontext/cartcontext.jsx";
 
 export default function ProductInfo({ pro }) {
-  const desc = pro?.discription?.[0]?.children?.[0]?.text ?? "No description";
+  const desc =
+    pro?.discription?.[0]?.children?.[0]?.text ??
+    "No description available for this course.";
+
   const { user } = useUser();
   const router = useRouter();
   const { cart, setCart } = useContext(CartContext);
@@ -19,7 +22,7 @@ export default function ProductInfo({ pro }) {
       return;
     }
 
-    const data = {
+    const payload = {
       data: {
         username: user.fullName,
         email: user.primaryEmailAddress?.emailAddress,
@@ -28,43 +31,50 @@ export default function ProductInfo({ pro }) {
     };
 
     try {
-      await CartAPI.addToCart(data);
-window.location.href = "https://nextlevel-m5ho.onrender.com/carts";
+      await CartAPI.addToCart(payload);
+      window.location.href = "https://nextlevel-m5ho.onrender.com/carts";
 
-      setCart((prevCart) => {
-        return prevCart ? [...prevCart, pro] : [pro];
-      });
+      setCart((prev) => (prev ? [...prev, pro] : [pro]));
     } catch (error) {
-      console.error("Error adding product to cart:", error.response?.data || error.message);
+      console.error("❌ Error adding product to cart:", error);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-xl space-y-4 sm:p-8 md:flex md:space-x-6 md:space-y-0">
-      <div className="flex-1">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">{pro.title}</h2>
-        <p className="text-sm sm:text-base text-gray-500 mt-1">{pro.category}</p>
-        <p className="text-base sm:text-lg text-gray-700 mt-2">{desc}</p>
-        <h2 className="text-2xl sm:text-3xl text-green-500 mt-3 font-semibold">${pro.price}</h2>
+    <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col justify-between">
+      <div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-1">{pro.title}</h2>
+        <p className="text-gray-500 text-sm mb-3">{pro.category}</p>
+        <p className="text-gray-700 text-base leading-relaxed mb-4">{desc}</p>
 
-        <div className="flex items-center mt-2 text-sm sm:text-base">
-          {pro?.delivery ? (
-            <BadgeCheck className="w-5 h-5 text-green-500 mr-2" />
-          ) : (
-            <BadgeCheck className="w-5 h-5 text-red-500 mr-2" />
-          )}
-          <span className={`text-gray-500 ${pro?.delivery ? "text-green-600" : "text-red-500"}`}>
-            {pro?.delivery ? "Eligible for FREE instant delivery" : "Not eligible for delivery"}
+        <h3 className="text-2xl text-green-600 font-semibold mb-4">
+          ${pro.price}
+        </h3>
+
+        <div className="flex items-center mb-4">
+          <BadgeCheck
+            className={`w-5 h-5 mr-2 ${
+              pro.delivery ? "text-green-500" : "text-red-500"
+            }`}
+          />
+          <span
+            className={`text-sm ${
+              pro.delivery ? "text-green-600" : "text-red-500"
+            }`}
+          >
+            {pro.delivery
+              ? "Eligible for instant digital access"
+              : "Not available for instant delivery"}
           </span>
         </div>
-
-        <button
-          className="mt-4 w-full md:w-auto flex items-center justify-center bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition font-medium"
-          onClick={handleAddToCart}
-        >
-          <ShoppingCartIcon className="w-5 h-5 mr-2" /> Add to Cart
-        </button>
       </div>
+
+      <button
+        onClick={handleAddToCart}
+        className="mt-4 w-full sm:w-auto flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition font-medium"
+      >
+        <ShoppingCartIcon className="w-5 h-5 mr-2" /> Add to Cart
+      </button>
     </div>
   );
 }
