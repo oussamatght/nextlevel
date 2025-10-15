@@ -38,11 +38,9 @@ export default function Footer() {
       id="footer"
       className="relative bg-gradient-to-br from-indigo-950 to-indigo-800 text-white pt-16 pb-10 px-6 overflow-hidden"
     >
-      {/* Decorative Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(255,255,255,0.1),_transparent_70%)]"></div>
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-12 z-10">
-        {/* Contact Form */}
         <div>
           <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
           <p className="text-gray-300 mb-6 text-sm">
@@ -93,7 +91,6 @@ export default function Footer() {
           )}
         </div>
 
-        {/* Contact Info */}
         <div>
           <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
           <p className="mb-3 text-gray-300 text-sm">
@@ -142,7 +139,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h2 className="text-2xl font-bold mb-4">Quick Links</h2>
           <ul className="space-y-3 text-gray-300 text-sm">
@@ -170,7 +166,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Divider */}
       <div className="border-t border-indigo-700/50 mt-12 pt-6 text-center text-gray-400 text-sm">
         © {new Date().getFullYear()} <span className="font-semibold text-white">NextLevel Academy</span>.  
         All rights reserved.
