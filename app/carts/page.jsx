@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../cartcontext/cartcontext.jsx";
 import CartAPI from "../_util/cartapi";
 import Link from "next/link";
-import { Trash2, ShoppingCart } from "lucide-react";
+import { Trash2, ShoppingCart, XCircle } from "lucide-react";
 
 export default function Carts() {
   const { cart, setCart } = useContext(CartContext);
+  const [quantities, setQuantities] = useState({});
 
+  // Delete one item
   const handleDelete = async (documentId) => {
     try {
       await CartAPI.removeCart(documentId);
@@ -18,15 +20,27 @@ export default function Carts() {
     }
   };
 
-  const total = cart.reduce(
-    (sum, item) =>
+  // Delete all items
+  const handleClearAll = () => {
+    setCart([]);
+  };
+
+  // Quantity handler
+  const handleQuantityChange = (id, value) => {
+    if (value < 1) return;
+    setQuantities((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // Total calculation
+  const total = cart.reduce((sum, item) => {
+    return (
       sum +
-      (item.products?.reduce(
-        (pSum, product) => pSum + (product.price || 0),
-        0
-      ) || 0),
-    0
-  );
+      (item.products?.reduce((pSum, product) => {
+        const quantity = quantities[product.id] || 1;
+        return pSum + (product.price || 0) * quantity;
+      }, 0) || 0)
+    );
+  }, 0);
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-indigo-50 to-white py-16">
@@ -38,20 +52,29 @@ export default function Carts() {
             Your Shopping Cart
           </h1>
           <p className="mt-2 text-gray-600">
-            Review your selected courses before proceeding to checkout.
+            Manage your selected items before proceeding to checkout.
           </p>
         </header>
 
         {/* Cart List */}
         {cart.length > 0 ? (
           <>
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={handleClearAll}
+                className="flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition"
+              >
+                <XCircle className="w-5 h-5" /> Clear All
+              </button>
+            </div>
+
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {cart.map((cartItem) =>
                 (cartItem.products || []).map((product) =>
                   (product.banner || []).map((banner, idx) => (
                     <li
                       key={`${cartItem.documentId}-${product.id}-${idx}`}
-                      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 overflow-hidden"
+                      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 overflow-hidden border border-gray-100"
                     >
                       <img
                         src={banner.url}
@@ -66,13 +89,54 @@ export default function Carts() {
                           <p className="text-sm text-gray-500 mb-3">
                             {product.category}
                           </p>
-                          <p className="text-lg font-bold text-green-600">
-                            ${product.price}
-                          </p>
+
+                          <div className="flex justify-between items-center mb-3">
+                            <p className="text-lg font-bold text-green-600">
+                              ${product.price}
+                            </p>
+
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() =>
+                                  handleQuantityChange(
+                                    product.id,
+                                    (quantities[product.id] || 1) - 1
+                                  )
+                                }
+                                className="px-2 py-1 border rounded-lg hover:bg-gray-100"
+                              >
+                                -
+                              </button>
+                              <input
+                                type="number"
+                                min="1"
+                                value={quantities[product.id] || 1}
+                                onChange={(e) =>
+                                  handleQuantityChange(
+                                    product.id,
+                                    Number(e.target.value)
+                                  )
+                                }
+                                className="w-12 text-center border rounded-md"
+                              />
+                              <button
+                                onClick={() =>
+                                  handleQuantityChange(
+                                    product.id,
+                                    (quantities[product.id] || 1) + 1
+                                  )
+                                }
+                                className="px-2 py-1 border rounded-lg hover:bg-gray-100"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
                         </div>
+
                         <button
                           onClick={() => handleDelete(cartItem.documentId)}
-                          className="mt-4 inline-flex items-center justify-center gap-2 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition"
+                          className="mt-3 inline-flex items-center justify-center gap-2 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition"
                         >
                           <Trash2 className="w-5 h-5" /> Remove
                         </button>
@@ -89,16 +153,25 @@ export default function Carts() {
                 Total: <span className="text-indigo-600">${total}</span>
               </div>
 
-              <Link
-                href={`/CheckoutFor?total=${total}`}
-                className="mt-4 md:mt-0 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-xl transition"
-              >
-                Proceed to Checkout
-              </Link>
+              <div className="flex gap-4 mt-4 md:mt-0">
+                <Link
+                  href="/"
+                  className="inline-block bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-6 py-3 rounded-xl transition"
+                >
+                  Continue Shopping
+                </Link>
+
+                <Link
+                  href={`/CheckoutFor?total=${total}`}
+                  className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition"
+                >
+                  Proceed to Checkout
+                </Link>
+              </div>
             </div>
 
             <p className="mt-6 text-center text-gray-500 text-sm">
-              📨 All purchased courses will be sent to your email instantly.
+              📨 All purchased items will be delivered instantly to your email.
             </p>
           </>
         ) : (
@@ -111,7 +184,7 @@ export default function Carts() {
               href="/"
               className="mt-6 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium transition"
             >
-              Browse Courses
+              Browse Products
             </Link>
           </div>
         )}
