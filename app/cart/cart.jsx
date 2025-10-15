@@ -1,121 +1,108 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../cartcontext/cartcontext.jsx";
-import CartAPI from "../_util/cartapi";
 import Link from "next/link";
-import { Trash2, ShoppingCart } from "lucide-react";
 
-export default function Carts() {
-  const { cart, setCart } = useContext(CartContext);
+function Cart() {
+  const { cart } = useContext(CartContext);
+  const [isOpen, setIsOpen] = useState(true);
 
-  const handleDelete = async (documentId) => {
-    try {
-      await CartAPI.removeCart(documentId);
-      setCart((prev) => prev.filter((c) => c.documentId !== documentId));
-    } catch (err) {
-      console.error("Error deleting cart:", err);
-    }
-  };
-
-  const total = cart.reduce(
-    (sum, item) =>
-      sum +
-      (item.products?.reduce(
-        (pSum, product) => pSum + (product.price || 0),
+  const total = cart.reduce((acc, cartItem) => {
+    if (!cartItem.products) return acc;
+    return (
+      acc +
+      cartItem.products.reduce(
+        (sum, product) => sum + (product.price || 0),
         0
-      ) || 0),
-    0
-  );
+      )
+    );
+  }, 0);
+
+  if (!isOpen) return null;
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-indigo-50 to-white py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <header className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-indigo-800 flex justify-center items-center gap-2">
-            <ShoppingCart className="w-8 h-8 text-indigo-600" />
-            Your Shopping Cart
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Review your selected courses before proceeding to checkout.
+    <div className="relative w-full max-w-md mx-auto mt-6 bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[80vh] transform transition-all duration-300 hover:shadow-2xl">
+      {/* Header */}
+      <div className="flex justify-between items-center px-5 py-4 border-b border-gray-100 bg-gray-50/50">
+        <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+          🛒 Your Cart
+        </h2>
+        <button
+          onClick={() => setIsOpen(false)}
+          className="text-gray-400 hover:text-red-500 transition transform hover:scale-110"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Product List */}
+      <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
+        {cart?.length === 0 ? (
+          <p className="text-center text-gray-500 text-sm py-10 animate-fadeIn">
+            Your cart is empty 🛍️
           </p>
-        </header>
-
-        {/* Cart List */}
-        {cart.length > 0 ? (
-          <>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {cart.map((cartItem) =>
-                (cartItem.products || []).map((product) =>
-                  (product.banner || []).map((banner, idx) => (
-                    <li
-                      key={`${cartItem.documentId}-${product.id}-${idx}`}
-                      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1 overflow-hidden"
-                    >
-                      <img
-                        src={banner.url}
-                        alt={banner.title || "Product Image"}
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="p-5 flex flex-col justify-between h-full">
-                        <div>
-                          <h3 className="text-xl font-semibold text-gray-900 mb-1 line-clamp-2">
-                            {product.title}
-                          </h3>
-                          <p className="text-sm text-gray-500 mb-3">
-                            {product.category}
-                          </p>
-                          <p className="text-lg font-bold text-green-600">
-                            ${product.price}
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => handleDelete(cartItem.documentId)}
-                          className="mt-4 inline-flex items-center justify-center gap-2 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition"
-                        >
-                          <Trash2 className="w-5 h-5" /> Remove
-                        </button>
-                      </div>
-                    </li>
-                  ))
-                )
-              )}
-            </ul>
-
-            {/* Total + Checkout */}
-            <div className="mt-12 flex flex-col md:flex-row justify-between items-center bg-white rounded-xl shadow-md p-6 border border-indigo-100">
-              <div className="text-2xl font-semibold text-gray-800">
-                Total: <span className="text-indigo-600">${total}</span>
-              </div>
-
-              <Link
-                href={`/CheckoutFor?total=${total}`}
-                className="mt-4 md:mt-0 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-xl transition"
-              >
-                Proceed to Checkout
-              </Link>
-            </div>
-
-            <p className="mt-6 text-center text-gray-500 text-sm">
-              📨 All purchased courses will be sent to your email instantly.
-            </p>
-          </>
         ) : (
-          <div className="text-center py-20">
-            <ShoppingCart className="w-16 h-16 mx-auto text-gray-400" />
-            <p className="mt-4 text-lg text-gray-600">
-              Your cart is currently empty.
-            </p>
-            <Link
-              href="/"
-              className="mt-6 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium transition"
-            >
-              Browse Courses
-            </Link>
-          </div>
+          cart.map((cartItem, cIndex) =>
+            cartItem.products?.map((product, pIndex) =>
+              product.banner?.map((banner, bIndex) => (
+                <div
+                  key={`${cIndex}-${pIndex}-${bIndex}`}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-white border border-gray-100 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-300"
+                >
+                  <img
+                    src={banner.url}
+                    alt={banner.title || "product image"}
+                    className="w-14 h-14 rounded-lg object-cover border border-gray-200"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-semibold text-gray-900 truncate">
+                      {product.title}
+                    </h3>
+                    <p className="text-xs text-gray-500 truncate">
+                      {product.category}
+                    </p>
+                    <p className="text-sm font-medium text-indigo-600 mt-1">
+                      ${product.price.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              ))
+            )
+          )
         )}
       </div>
-    </section>
+
+      {/* Footer */}
+      <div className="px-5 py-4 border-t border-gray-100 bg-white space-y-3">
+        <div className="flex justify-between text-sm font-semibold text-gray-900">
+          <span>Total:</span>
+          <span className="text-indigo-600">${total.toFixed(2)}</span>
+        </div>
+
+        <Link
+          href="/carts"
+          className="block w-full text-center rounded-xl border border-indigo-900 py-2 text-indigo-900 font-medium text-sm transition hover:bg-indigo-50"
+        >
+          View Cart
+        </Link>
+
+        <Link
+          href={`/CheckoutFor?total=${total}`}
+          className="block w-full text-center rounded-xl bg-indigo-900 py-2 text-white font-medium text-sm transition hover:bg-indigo-700"
+        >
+          Checkout
+        </Link>
+
+        <Link
+          href="#see-all"
+          className="block text-center text-indigo-900 text-xs underline underline-offset-4 hover:text-indigo-600"
+        >
+          Continue Shopping
+        </Link>
+      </div>
+    </div>
   );
 }
+
+export default Cart;    
