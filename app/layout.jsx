@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className="antialiased">
           <CartContext.Provider value={{ cart, setCart }}>
-            <Header /> 
+            <Header />
 
             <SignedIn>
               <main>{children}</main>
@@ -32,3 +32,8 @@ export default function RootLayout({ children }) {
     </ClerkProvider>
   );
 }
+
+export const metadata = {
+  title: "NextLevel | Learn Anything",
+  description: "Upgrade your skills with premium online courses.",
+};
