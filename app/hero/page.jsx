@@ -10,28 +10,31 @@ import {
   Globe,
   Code2,
   MonitorSmartphone,
+  Cpu,
+  Cloud,
 } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="relative bg-gradient-to-br from-indigo-700 via-indigo-800 to-indigo-950 text-white flex items-center overflow-hidden min-h-[90vh]">
-      {/* 🌌 Background */}
+      {/* 🌌 Subtle Background Pattern */}
       <div className="absolute inset-0 bg-[url('/hero-bg-pattern.svg')] opacity-10 pointer-events-none"></div>
 
+      {/* 💫 Layout */}
       <div className="container mx-auto px-6 sm:px-10 lg:px-20 grid md:grid-cols-2 items-center gap-10 z-10">
         {/* 🧠 Left Content */}
         <div className="text-center md:text-left space-y-6">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
-            Master the Future with{" "}
-            <span className="text-yellow-300">Tech & Digital Skills</span>
+            Build the Future with{" "}
+            <span className="text-yellow-300">Technology & Innovation</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-200 leading-relaxed max-w-lg mx-auto md:mx-0">
-            Learn coding, design, AI, marketing, and more from industry experts.
-            Build real-world skills that shape your career.
+            Learn programming, AI, cloud, and cybersecurity — gain the skills
+            that drive tomorrow’s digital world.
           </p>
 
-          {/* 🎯 CTA Buttons */}
+          {/* 🎯 Call to Action */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a
               href="#see-all"
@@ -59,41 +62,41 @@ export default function Hero() {
               <Laptop className="w-4 h-4 text-yellow-300" /> Expert Instructors
             </div>
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-yellow-300" /> 10k+ Students
+              <Users className="w-4 h-4 text-yellow-300" /> 10k+ Learners
             </div>
           </div>
         </div>
 
         {/* 💻 Right Visuals */}
         <div className="relative flex justify-center md:justify-end">
-          {/* Background glow */}
+          {/* Glow background */}
           <div className="absolute -inset-10 bg-indigo-500/20 blur-3xl rounded-full"></div>
 
-          {/* Floating image grid */}
+          {/* Image Grid — Tech-Only, No People */}
           <div className="relative grid grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             <img
-              src="https://images.unsplash.com/photo-1604933939505-fd0723826887?auto=format&fit=crop&w=800&q=80"
-              alt="Person coding on a laptop"
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+              alt="Circuit board and tech innovation"
               className="rounded-2xl shadow-lg w-36 sm:w-44 md:w-52 h-36 sm:h-44 md:h-52 object-cover hover:scale-105 transition duration-500"
             />
             <img
-              src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=800&q=80"
-              alt="Multiple screens displaying code"
+              src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=800&q=80"
+              alt="Laptop with code editor"
               className="rounded-2xl shadow-lg w-36 sm:w-44 md:w-52 h-36 sm:h-44 md:h-52 object-cover hover:scale-105 transition duration-500 mt-6"
             />
             <img
-              src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=800&q=80"
-              alt="Clean coding workspace"
+              src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80"
+              alt="Cloud computing concept"
               className="rounded-2xl shadow-lg w-36 sm:w-44 md:w-52 h-36 sm:h-44 md:h-52 object-cover hover:scale-105 transition duration-500"
             />
             <img
-              src="https://images.unsplash.com/photo-1617042375816-ff45873a4b98?auto=format&fit=crop&w=800&q=80"
-              alt="Person working on a tablet with code"
+              src="https://images.unsplash.com/photo-1504386106331-3e4e71712b38?auto=format&fit=crop&w=800&q=80"
+              alt="Abstract digital network"
               className="rounded-2xl shadow-lg w-36 sm:w-44 md:w-52 h-36 sm:h-44 md:h-52 object-cover hover:scale-105 transition duration-500 mt-6"
             />
           </div>
 
-          {/* Floating icons */}
+          {/* Floating Icons */}
           <div className="absolute -bottom-6 -left-6 bg-indigo-800/60 backdrop-blur-md border border-indigo-700 rounded-full p-3">
             <Code2 className="text-yellow-300 w-6 h-6" />
           </div>
