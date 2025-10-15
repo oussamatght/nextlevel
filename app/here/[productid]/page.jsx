@@ -7,7 +7,7 @@ import Breadcrumb from "@/app/breadcremp/page";
 import ProductBanner from "./_componenent/productbanner/page";
 import ProductInfo from "./_componenent/proudectinfo/page";
 import ProductList from "@/app/components/productlist";
-import Animation from "@/app/components/animation";
+import Animation from "@/app/components/animation ";
 
 export default function ProductPage() {
   const { productid } = useParams();
