@@ -3,10 +3,12 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../cartcontext/cartcontext.jsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Cart() {
   const { cart } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(true);
+const router = useRouter();
 
   const total = cart.reduce((acc, cartItem) => {
     if (!cartItem.products) return acc;
@@ -92,12 +94,12 @@ function Cart() {
           Checkout
         </Link>
 
-        <Link
-          href="https://nextlevel-m5ho.onrender.com/#see-all"
-          className="block text-center text-indigo-900 text-xs underline underline-offset-4 hover:text-indigo-600"
-        >
-          Continue Shopping
-        </Link>
+      <button
+  onClick={() => router.push("/see-all")}
+  className="block w-full text-center text-indigo-900 text-xs underline underline-offset-4 hover:text-indigo-600"
+>
+  Continue Shopping
+</button>
       </div>
     </div>
   );
