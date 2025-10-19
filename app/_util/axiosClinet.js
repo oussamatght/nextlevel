@@ -1,6 +1,6 @@
 const axios = require('axios');
 const apikey = process.env.NEXT_PUBLIC_STRAPI_API_Key;
-const apiUrl = "https://strip-dn1h.onrender.com"
+const apiUrl = "https://nextlevel-backend.onrender.com"
 const axiosClient = axios.create({
     baseURL: apiUrl,
     headers: {
