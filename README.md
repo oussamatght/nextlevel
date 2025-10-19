@@ -1,7 +1,7 @@
 🛒 NextLevel Frontend — E-Commerce Platform
 Tech Stack: Next.js • React • Stripe • Clerk • TailwindCSS
 Backend: NextLevel Backend (Strapi) in this repo https://github.com/oussamatght/nextlevel-backend
-Live Demo: [https://nextlevel-m5ho.onrender.com](https://nextlevel-m5ho.onrender.com)
+Live Demo: [https://nextlevel-m5ho.onrender.com](https://nextlevel-brown.vercel.app/)
 
 ---
 
