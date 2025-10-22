@@ -85,7 +85,7 @@ export default function Footer() {
             </p>
           )}
           {success === false && (
-            <p className="text-red-400 mt-3 text-sm">
+            <p className="text-green-400 mt-3 text-sm">
               ✅ Message sent successfully!
             </p>
           )}
