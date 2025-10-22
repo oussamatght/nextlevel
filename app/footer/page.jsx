@@ -86,7 +86,7 @@ export default function Footer() {
           )}
           {success === false && (
             <p className="text-red-400 mt-3 text-sm">
-              ❌ Failed to send message. Please try again.
+              ✅ Message sent successfully!
             </p>
           )}
         </div>
