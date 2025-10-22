@@ -15,24 +15,20 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className="antialiased">
           <CartContext.Provider value={{ cart, setCart }}>
-            <Header /> 
 
             <SignedIn>
+            <Header />
               <main>{children}</main>
+              <Footer />
             </SignedIn>
 
             <SignedOut>
               <RedirectToSignIn />
             </SignedOut>
 
-            <Footer />
           </CartContext.Provider>
         </body>
       </html>
     </ClerkProvider>
   );
 }
-
-
-
-
