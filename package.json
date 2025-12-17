@@ -1,0 +1,35 @@
+{
+    "name": "ecoprojet",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@clerk/nextjs": "^6.31.4",
+        "@emailjs/browser": "^4.4.1",
+        "@stripe/react-stripe-js": "^3.9.2",
+        "@stripe/stripe-js": "^7.9.0",
+        "axios": "^1.11.0",
+        "framer-motion": "^12.23.12",
+        "lucide-react": "^0.541.0",
+        "next": "^16.0.10",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "resend": "^6.0.2",
+        "rippleui": "^1.12.1",
+        "stripe": "^18.5.0"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "24.3.0",
+        "@types/react": "19.1.11",
+        "daisyui": "^5.0.50",
+        "tailwindcss": "^4",
+        "typescript": "5.9.2"
+    }
+}
