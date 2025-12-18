@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = `https://nextlevel-backend-0dmg.onrender.com/api/products`;
+const API_URL = `https://nextlevel-backend-wz1k.onrender.com/api/products`;
 
 export const products = {
     getAll: async() => {

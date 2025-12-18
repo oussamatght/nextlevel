@@ -32,7 +32,7 @@ export default function ProductInfo({ pro }) {
 
     try {
       await CartAPI.addToCart(payload);
-      window.location.href = "https://nextlevel-1-3xou.onrender.com/carts";
+      window.location.href = "/carts";
 
       setCart((prev) => (prev ? [...prev, pro] : [pro]));
     } catch (error) {
