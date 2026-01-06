@@ -113,7 +113,7 @@ erDiagram
 
   CARTS {
     uuid id PK
-    uuid user_id FK (nullable for guest)
+    uuid user_id FK
     string session_id
     timestamp created_at
     timestamp updated_at
