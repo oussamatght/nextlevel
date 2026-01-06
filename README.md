@@ -34,13 +34,13 @@ Full-stack e-commerce built with **Next.js** + **Strapi** + **Stripe** + **Clerk
 ## Architecture
 ```mermaid
 flowchart LR
-  subgraph Client [Next.js (Vercel)]
+  subgraph Client["Next.js (Vercel)"]
     UI[UI / Pages]
     Cart[Cart State]
     Fetch[Data Fetching]
   end
 
-  subgraph Strapi [Strapi CMS/API]
+  subgraph Strapi["Strapi CMS/API"]
     AuthZ[Role & Permissions]
     Webhooks[Webhooks]
   end
