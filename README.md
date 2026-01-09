@@ -2,7 +2,6 @@
 Full-stack e-commerce built with **Next.js** + **Strapi** + **Stripe** + **Clerk** + **Tailwind CSS**. Browse products, manage carts, check out securely, and administer catalog/content with a Strapi-powered admin. Media is hosted on Cloudinary; design is fully responsive.
 
 ---
-
 ## Table of Contents
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
